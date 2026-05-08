@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     )
     supabase_url: str | None = Field(default=None, alias="SUPABASE_URL")
     supabase_anon_key: str | None = Field(default=None, alias="SUPABASE_ANON_KEY")
+    supabase_service_role_key: str | None = Field(
+        default=None,
+        alias="SUPABASE_SERVICE_ROLE_KEY",
+    )
 
     model_config = SettingsConfigDict(
         env_file=".env",
