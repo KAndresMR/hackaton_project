@@ -1,7 +1,10 @@
 import 'package:credynox/core/router/routes.dart';
 import 'package:credynox/frontend/layouts/main_shell.dart';
 import 'package:credynox/frontend/screens/connect_bank/pressentation/connect_bank_screen.dart';
+import 'package:credynox/frontend/screens/accounts/presentation/accounts_screen.dart';
+import 'package:credynox/frontend/screens/automations/presentation/automations_screen.dart';
 import 'package:credynox/frontend/screens/dashboard/presentation/dashboard_screen.dart';
+import 'package:credynox/frontend/screens/profile/presentation/profile_screen.dart';
 import 'package:credynox/frontend/screens/splash/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -44,6 +47,30 @@ final routerProvider = Provider<GoRouter>((ref) {
             pageBuilder: (context, state) => _buildFadePage(
               state: state,
               child: const DashboardScreen(),
+            ),
+          ),
+          GoRoute(
+            path: AppRoutes.accounts,
+            name: 'accounts',
+            pageBuilder: (context, state) => _buildFadePage(
+              state: state,
+              child: const AccountsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: AppRoutes.automations,
+            name: 'automations',
+            pageBuilder: (context, state) => _buildFadePage(
+              state: state,
+              child: const AutomationsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: AppRoutes.profile,
+            name: 'profile',
+            pageBuilder: (context, state) => _buildFadePage(
+              state: state,
+              child: const ProfileScreen(),
             ),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:credynox/core/theme/app_colors.dart';
 import 'package:credynox/frontend/widgets/nx_card.dart';
+import 'package:credynox/frontend/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class TimelineCard extends StatelessWidget {
@@ -21,37 +22,53 @@ class TimelineCard extends StatelessWidget {
 
           const SizedBox(height: 24),
 
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.bgOverlay,
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: AppColors.borderSubtle,
-              ),
-            ),
+          FutureBuilder<List<dynamic>>(
+            future: ApiService.getAutomationTimeline(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SizedBox(
+                  height: 120,
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
 
-            child: Column(
-              children: [
-                _TimelineItem(
-                  title: 'Liquidity rebalance executed',
-                  time: '2 min ago',
+              final items = snapshot.data;
+              if (items == null || items.isEmpty) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.bgOverlay,
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: AppColors.borderSubtle),
+                  ),
+                  padding: const EdgeInsets.all(18),
+                  child: const Text('No timeline events'),
+                );
+              }
+
+              return Container(
+                decoration: BoxDecoration(
+                  color: AppColors.bgOverlay,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    color: AppColors.borderSubtle,
+                  ),
                 ),
-
-                const NxDivider(),
-
-                _TimelineItem(
-                  title: 'New transaction categorized',
-                  time: '12 min ago',
+                child: Column(
+                  children: List.generate(items.length, (i) {
+                    final it = items[i] as Map<String, dynamic>;
+                    return Column(
+                      children: [
+                        _TimelineItem(
+                          title: it['action'] ?? 'Event',
+                          time: it['timestamp'] ?? '',
+                        ),
+                        if (i < items.length - 1) const NxDivider(),
+                      ],
+                    );
+                  }),
                 ),
-
-                const NxDivider(),
-
-                _TimelineItem(
-                  title: 'Cashflow prediction updated',
-                  time: '1 hour ago',
-                ),
-              ],
-            ),
+              );
+            },
           ),
         ],
       ),

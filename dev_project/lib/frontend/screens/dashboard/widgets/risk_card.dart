@@ -1,5 +1,6 @@
 import 'package:credynox/core/theme/app_colors.dart';
 import 'package:credynox/frontend/widgets/nx_card.dart';
+import 'package:credynox/frontend/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 
@@ -26,108 +27,121 @@ class RiskCard extends StatelessWidget {
           ),
 
           const SizedBox(height: 28),
+          FutureBuilder<Map<String, dynamic>>(
+            future: ApiService.getDashboard(),
+            builder: (context, snapshot) {
+              final dashboard = snapshot.data ?? {};
+              final riskScore = (dashboard['risk_score'] as num?)?.toInt() ?? 24;
 
-          Row(
-            children: [
-              Expanded(
-                child: _RiskMetric(
-                  label: 'Risk Score',
-                  value: '24%',
-                  color: AppColors.emerald,
-                ),
-              ),
+              return Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _RiskMetric(
+                          label: 'Risk Score',
+                          value: '$riskScore%',
+                          color: riskScore < 30 ? AppColors.emerald : AppColors.amber,
+                        ),
+                      ),
 
-              const SizedBox(width: 18),
+                      const SizedBox(width: 18),
 
-              Expanded(
-                child: _RiskMetric(
-                  label: 'Volatility',
-                  value: 'Low',
-                  color: AppColors.cyan,
-                ),
-              ),
+                      Expanded(
+                        child: _RiskMetric(
+                          label: 'Volatility',
+                          value: riskScore < 30 ? 'Low' : 'Medium',
+                          color: AppColors.cyan,
+                        ),
+                      ),
 
-              const SizedBox(width: 18),
+                      const SizedBox(width: 18),
 
-              Expanded(
-                child: _RiskMetric(
-                  label: 'Exposure',
-                  value: 'Moderate',
-                  color: AppColors.amber,
-                ),
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 28),
-
-          Container(
-            padding: const EdgeInsets.all(18),
-
-            decoration: BoxDecoration(
-              color: AppColors.bgOverlay,
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: AppColors.borderSubtle,
-              ),
-            ),
-
-            child: Row(
-              children: [
-                Container(
-                  width: 12,
-                  height: 12,
-
-                  decoration: const BoxDecoration(
-                    color: AppColors.emerald,
-                    shape: BoxShape.circle,
+                      Expanded(
+                        child: _RiskMetric(
+                          label: 'Exposure',
+                          value: riskScore < 30 ? 'Moderate' : 'Elevated',
+                          color: AppColors.amber,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
 
-                const SizedBox(width: 12),
+                  const SizedBox(height: 28),
 
-                const Expanded(
-                  child: Text(
-                    'System risk is currently stable with no abnormal liquidity behavior detected.',
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      height: 1.5,
+                  Container(
+                    padding: const EdgeInsets.all(18),
+
+                    decoration: BoxDecoration(
+                      color: AppColors.bgOverlay,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: AppColors.borderSubtle,
+                      ),
+                    ),
+
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 12,
+                          height: 12,
+
+                          decoration: BoxDecoration(
+                            color: riskScore < 30 ? AppColors.emerald : AppColors.amber,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+
+                        const SizedBox(width: 12),
+
+                        Expanded(
+                          child: Text(
+                            riskScore < 30
+                                ? 'System risk is currently stable with no abnormal liquidity behavior detected.'
+                                : 'Risk is elevated. Review automation and transaction patterns.',
+                            style: const TextStyle(
+                              color: AppColors.textSecondary,
+                              height: 1.5,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
 
-          const SizedBox(height: 24),
+                  const SizedBox(height: 24),
 
-          Column(
-            children: [
-              _RiskEventRow(
-                title: 'Liquidity fluctuation detected',
-                time: '12 min ago',
-                severity: 'Low',
-                severityColor: AppColors.emerald,
-              ),
+                  Column(
+                    children: [
+                      _RiskEventRow(
+                        title: 'Liquidity fluctuation detected',
+                        time: '12 min ago',
+                        severity: 'Low',
+                        severityColor: AppColors.emerald,
+                      ),
 
-              const SizedBox(height: 14),
+                      const SizedBox(height: 14),
 
-              _RiskEventRow(
-                title: 'Automation rebalance executed',
-                time: '28 min ago',
-                severity: 'Medium',
-                severityColor: AppColors.amber,
-              ),
+                      _RiskEventRow(
+                        title: 'Automation rebalance executed',
+                        time: '28 min ago',
+                        severity: 'Medium',
+                        severityColor: AppColors.amber,
+                      ),
 
-              const SizedBox(height: 14),
+                      const SizedBox(height: 14),
 
-              _RiskEventRow(
-                title: 'Cashflow prediction updated',
-                time: '1 hour ago',
-                severity: 'Info',
-                severityColor: AppColors.cyan,
-              ),
-            ],
+                      _RiskEventRow(
+                        title: 'Cashflow prediction updated',
+                        time: '1 hour ago',
+                        severity: 'Info',
+                        severityColor: AppColors.cyan,
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),

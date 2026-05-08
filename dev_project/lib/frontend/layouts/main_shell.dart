@@ -113,6 +113,9 @@ class _MobileShell extends StatelessWidget {
 
   int _getSelectedIndex(String location) {
     if (location.startsWith(AppRoutes.dashboard)) return 0;
+    if (location.startsWith(AppRoutes.accounts)) return 1;
+    if (location.startsWith(AppRoutes.automations)) return 2;
+    if (location.startsWith(AppRoutes.profile)) return 3;
     return 0;
   }
 
@@ -120,6 +123,15 @@ class _MobileShell extends StatelessWidget {
     switch (index) {
       case 0:
         context.go(AppRoutes.dashboard);
+        break;
+      case 1:
+        context.go(AppRoutes.accounts);
+        break;
+      case 2:
+        context.go(AppRoutes.automations);
+        break;
+      case 3:
+        context.go(AppRoutes.profile);
         break;
     }
   }
@@ -161,30 +173,30 @@ class _Sidebar extends StatelessWidget {
                   _SidebarItem(
                     icon: Icons.account_balance_rounded,
                     label: 'Accounts',
-                    isActive: false,
-                    onTap: () {},
+                    isActive: location.startsWith(AppRoutes.accounts),
+                    onTap: () => context.go(AppRoutes.accounts),
                   ),
                   const SizedBox(height: 2),
                   _SidebarItem(
                     icon: Icons.bolt_rounded,
                     label: 'Automations',
-                    isActive: false,
-                    onTap: () {},
+                    isActive: location.startsWith(AppRoutes.automations),
+                    onTap: () => context.go(AppRoutes.automations),
                     badge: '3',
                   ),
                   const SizedBox(height: 2),
                   _SidebarItem(
                     icon: Icons.timeline_rounded,
                     label: 'Timeline',
-                    isActive: false,
-                    onTap: () {},
+                    isActive: location.startsWith(AppRoutes.automations),
+                    onTap: () => context.go(AppRoutes.automations),
                   ),
                   const SizedBox(height: 2),
                   _SidebarItem(
                     icon: Icons.analytics_rounded,
                     label: 'Analytics',
-                    isActive: false,
-                    onTap: () {},
+                    isActive: location.startsWith(AppRoutes.automations),
+                    onTap: () => context.go(AppRoutes.automations),
                   ),
                   const Spacer(),
                   const Divider(color: AppColors.borderSubtle),
@@ -192,14 +204,14 @@ class _Sidebar extends StatelessWidget {
                   _SidebarItem(
                     icon: Icons.settings_rounded,
                     label: 'Settings',
-                    isActive: false,
-                    onTap: () {},
+                    isActive: location.startsWith(AppRoutes.profile),
+                    onTap: () => context.go(AppRoutes.profile),
                   ),
                   _SidebarItem(
                     icon: Icons.help_outline_rounded,
                     label: 'Help',
-                    isActive: false,
-                    onTap: () {},
+                    isActive: location.startsWith(AppRoutes.profile),
+                    onTap: () => context.go(AppRoutes.profile),
                   ),
                   const SizedBox(height: 16),
                 ],

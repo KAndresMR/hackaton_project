@@ -1,5 +1,6 @@
 import 'package:credynox/core/theme/app_colors.dart';
 import 'package:credynox/frontend/widgets/nx_card.dart';
+import 'package:credynox/frontend/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticsCard extends StatelessWidget {
@@ -21,32 +22,37 @@ class AnalyticsCard extends StatelessWidget {
 
           const SizedBox(height: 24),
 
-          Container(
-            height: 240,
+          FutureBuilder<List<dynamic>>(
+            future: ApiService.getTransactions(),
+            builder: (context, snapshot) {
+              final transactions = snapshot.data ?? const [];
+              final values = transactions.isEmpty
+                  ? [60.0, 120.0, 90.0, 170.0, 130.0, 200.0]
+                  : transactions
+                      .map((item) => ((item as Map<String, dynamic>)['amount'] as num).abs().toDouble())
+                      .toList();
 
-            decoration: BoxDecoration(
-              color: AppColors.bgOverlay,
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: AppColors.borderSubtle,
-              ),
-            ),
+              return Container(
+                height: 240,
 
-            padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.bgOverlay,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    color: AppColors.borderSubtle,
+                  ),
+                ),
 
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: const EdgeInsets.all(20),
 
-              children: [
-                _Bar(60),
-                _Bar(120),
-                _Bar(90),
-                _Bar(170),
-                _Bar(130),
-                _Bar(200),
-              ],
-            ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: values.take(6).map((value) => _Bar(value)).toList(),
+                ),
+              );
+            },
           ),
         ],
       ),

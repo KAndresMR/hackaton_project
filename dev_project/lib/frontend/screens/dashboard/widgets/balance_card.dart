@@ -1,5 +1,6 @@
 import 'package:credynox/core/theme/app_colors.dart';
 import 'package:credynox/frontend/widgets/nx_card.dart';
+import 'package:credynox/frontend/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 
@@ -26,13 +27,40 @@ class BalanceCard extends StatelessWidget {
 
           const SizedBox(height: 34),
 
-          Text(
-            '\$24,580.00',
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: -1.5,
-                ),
+          FutureBuilder<Map<String, dynamic>>(
+            future: ApiService.getDashboard(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SizedBox(
+                  height: 48,
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+
+              if (snapshot.hasError) {
+                return Text(
+                  '\$24,580.00',
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: -1.5,
+                      ),
+                );
+              }
+
+              final data = snapshot.data ?? {};
+              final balanceValue = data['balance'];
+              final balance = balanceValue is num ? balanceValue : 24580;
+
+              return Text(
+                '\$${balance.toStringAsFixed(2)}',
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -1.5,
+                    ),
+              );
+            },
           ),
 
           const SizedBox(height: 20),
