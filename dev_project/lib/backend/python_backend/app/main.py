@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
 from app.core.supabase import get_supabase_client
+from app.routes.product_routes import router as product_router
 from app.routes.automation_routes import router as automation_router
 from app.routes.dashboard import router as dashboard_router
 from app.routes.simulation_routes import router as simulation_router
@@ -39,6 +40,7 @@ app.include_router(dashboard_router)
 app.include_router(transactions_router)
 app.include_router(automation_router)
 app.include_router(simulation_router)
+app.include_router(product_router)
 
 
 @app.get("/", tags=["system"])

@@ -23,6 +23,7 @@ abstract class AppTheme {
         onError: AppColors.textPrimary,
       ),
       scaffoldBackgroundColor: AppColors.bgBase,
+      useMaterial3: true,
       textTheme: _buildTextTheme(),
       cardTheme: _buildCardTheme(),
       appBarTheme: _buildAppBarTheme(),
@@ -36,6 +37,13 @@ abstract class AppTheme {
       outlinedButtonTheme:
           OutlinedButtonThemeData(style: _buildOutlinedButtonStyle()),
       inputDecorationTheme: _buildInputTheme(),
+      // Premium enhancements
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
+      ),
       extensions: const [],
     );
   }

@@ -30,12 +30,19 @@ class _DesktopShell extends StatelessWidget {
       backgroundColor: AppColors.bgBase,
       body: Row(
         children: [
-          _Sidebar(),
-          const VerticalDivider(
+          _PremiumSidebar(),
+          Container(
             width: 1,
             color: AppColors.borderSubtle,
           ),
-          Expanded(child: child),
+          Expanded(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1440),
+                child: SizedBox.expand(child: child),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -137,23 +144,23 @@ class _MobileShell extends StatelessWidget {
   }
 }
 
-// ── Desktop Sidebar ───────────────────────────────────────────────────────────
-class _Sidebar extends StatelessWidget {
-  const _Sidebar();
+// ── Premium Desktop Sidebar ──────────────────────────────────────────────────────
+class _PremiumSidebar extends StatelessWidget {
+  const _PremiumSidebar();
 
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
 
     return Container(
-      width: 240,
+      width: 280,
       color: AppColors.bgSurface,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ── Logo ────────────────────────────────────────────────────────
           Padding(
-            padding: const EdgeInsets.fromLTRB(24, 28, 24, 32),
+            padding: const EdgeInsets.fromLTRB(24, 32, 24, 36),
             child: _CredyNoxLogo(),
           ),
 
@@ -169,34 +176,34 @@ class _Sidebar extends StatelessWidget {
                     isActive: location.startsWith(AppRoutes.dashboard),
                     onTap: () => context.go(AppRoutes.dashboard),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: 8),
                   _SidebarItem(
                     icon: Icons.account_balance_rounded,
                     label: 'Accounts',
                     isActive: location.startsWith(AppRoutes.accounts),
                     onTap: () => context.go(AppRoutes.accounts),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: 8),
                   _SidebarItem(
                     icon: Icons.bolt_rounded,
                     label: 'Automations',
                     isActive: location.startsWith(AppRoutes.automations),
                     onTap: () => context.go(AppRoutes.automations),
-                    badge: '3',
+                    badge: '4',
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: 8),
                   _SidebarItem(
-                    icon: Icons.timeline_rounded,
-                    label: 'Timeline',
-                    isActive: location.startsWith(AppRoutes.automations),
-                    onTap: () => context.go(AppRoutes.automations),
+                    icon: Icons.history_rounded,
+                    label: 'Activity',
+                    isActive: location.startsWith(AppRoutes.activity),
+                    onTap: () => context.go(AppRoutes.activity),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: 8),
                   _SidebarItem(
                     icon: Icons.analytics_rounded,
                     label: 'Analytics',
-                    isActive: location.startsWith(AppRoutes.automations),
-                    onTap: () => context.go(AppRoutes.automations),
+                    isActive: location.startsWith(AppRoutes.analytics),
+                    onTap: () => context.go(AppRoutes.analytics),
                   ),
                   const Spacer(),
                   const Divider(color: AppColors.borderSubtle),
@@ -204,14 +211,14 @@ class _Sidebar extends StatelessWidget {
                   _SidebarItem(
                     icon: Icons.settings_rounded,
                     label: 'Settings',
-                    isActive: location.startsWith(AppRoutes.profile),
-                    onTap: () => context.go(AppRoutes.profile),
+                    isActive: location.startsWith(AppRoutes.settings),
+                    onTap: () => context.go(AppRoutes.settings),
                   ),
                   _SidebarItem(
                     icon: Icons.help_outline_rounded,
-                    label: 'Help',
-                    isActive: location.startsWith(AppRoutes.profile),
-                    onTap: () => context.go(AppRoutes.profile),
+                    label: 'Help & Support',
+                    isActive: location.startsWith(AppRoutes.help),
+                    onTap: () => context.go(AppRoutes.help),
                   ),
                   const SizedBox(height: 16),
                 ],
@@ -220,13 +227,16 @@ class _Sidebar extends StatelessWidget {
           ),
 
           // ── User profile row ─────────────────────────────────────────────
-          _SidebarUserRow(),
+          GestureDetector(
+            onTap: () => context.go(AppRoutes.profile),
+            child: const _SidebarUserRow(),
+          ),
         ],
       ),
     )
         .animate()
         .fadeIn(duration: 350.ms, curve: Curves.easeOut)
-        .slideX(begin: -0.03, duration: 350.ms, curve: Curves.easeOut);
+        .slideX(begin: -0.05, duration: 350.ms, curve: Curves.easeOut);
   }
 }
 
@@ -390,6 +400,8 @@ class _CredyNoxLogo extends StatelessWidget {
 
 // ── Sidebar User Row ──────────────────────────────────────────────────────────
 class _SidebarUserRow extends StatelessWidget {
+  const _SidebarUserRow();
+
   @override
   Widget build(BuildContext context) {
     return Container(
