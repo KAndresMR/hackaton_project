@@ -4,6 +4,7 @@ import 'package:credynox/core/theme/app_colors.dart';
 import 'package:credynox/frontend/config/gen/app_localizations.dart';
 import 'package:credynox/frontend/services/api_service.dart';
 import 'package:credynox/frontend/widgets/nx_card.dart';
+import 'package:credynox/frontend/widgets/nx_pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
@@ -369,94 +370,102 @@ class _BankCard extends StatelessWidget {
                 ? l10n.bankCardBtnConnect
                 : l10n.bankCardBtnSelect;
 
-    return NxCard(
-      hoverable: !bank['connected'],
-      borderColor: isActive ? AppColors.cyan : null,
-      glowColor: isActive ? AppColors.cyan : null,
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisSize.min para que el card se ajuste al contenido
-        // en el layout de columna (móvil)
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // ── Fila superior: ícono + nombre ─────────────────
-          Row(
-            children: [
-              NxIconBox(
-                icon: Icons.account_balance_rounded,
-                color: bank['connected'] ? AppColors.emerald : AppColors.cyan,
-                size: 36,
-                iconSize: 18,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  bank['name'],
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
+    return NxPressable(
+      pressScale: 0.94,
+      onTap: connecting
+          ? null
+          : isSelected
+              ? onConnect
+              : onSelect,
+      child: NxCard(
+        hoverable: !bank['connected'],
+        borderColor: isActive ? AppColors.cyan : null,
+        glowColor: isActive ? AppColors.cyan : null,
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisSize.min para que el card se ajuste al contenido
+          // en el layout de columna (móvil)
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // ── Fila superior: ícono + nombre ─────────────────
+            Row(
+              children: [
+                NxIconBox(
+                  icon: Icons.account_balance_rounded,
+                  color: bank['connected'] ? AppColors.emerald : AppColors.cyan,
+                  size: 36,
+                  iconSize: 18,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    bank['name'],
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textPrimary,
+                    ),
                   ),
                 ),
-              ),
-              // Check si ya está conectado
-              if (bank['connected'])
-                const Icon(
-                  Icons.check_circle_rounded,
-                  size: 18,
-                  color: AppColors.emerald,
-                ),
-            ],
-          ),
-
-          const SizedBox(height: 10),
-
-          // ── Estado ────────────────────────────────────────
-          Text(
-            statusText,
-            style: TextStyle(
-              fontSize: 12,
-              color: bank['connected']
-                  ? AppColors.emerald
-                  : isSelected
-                      ? AppColors.cyan
-                      : AppColors.textTertiary,
+                // Check si ya está conectado
+                if (bank['connected'])
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    size: 18,
+                    color: AppColors.emerald,
+                  ),
+              ],
             ),
-          ),
-
-          const SizedBox(height: 14),
-          const NxDivider(),
-          const SizedBox(height: 14),
-
-          // ── Botón acción ──────────────────────────────────
-          SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: bank['connected']
-                ? OutlinedButton(
-                    onPressed: (){},
-                    child: Text(btnText),
-                  )
-                : FilledButton(
-                    onPressed: connecting
-                        ? null
-                        : isSelected
-                            ? onConnect
-                            : onSelect,
-                    child: connecting
-                        ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: AppColors.bgBase,
-                            ),
-                          )
-                        : Text(btnText),
-                  ),
-          ),
-        ],
+      
+            const SizedBox(height: 10),
+      
+            // ── Estado ────────────────────────────────────────
+            Text(
+              statusText,
+              style: TextStyle(
+                fontSize: 12,
+                color: bank['connected']
+                    ? AppColors.emerald
+                    : isSelected
+                        ? AppColors.cyan
+                        : AppColors.textTertiary,
+              ),
+            ),
+      
+            const SizedBox(height: 14),
+            const NxDivider(),
+            const SizedBox(height: 14),
+      
+            // ── Botón acción ──────────────────────────────────
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: bank['connected']
+                  ? OutlinedButton(
+                      onPressed: (){},
+                      child: Text(btnText),
+                    )
+                  : FilledButton(
+                      onPressed: connecting
+                          ? null
+                          : isSelected
+                              ? onConnect
+                              : onSelect,
+                      child: connecting
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: AppColors.bgBase,
+                              ),
+                            )
+                          : Text(btnText),
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

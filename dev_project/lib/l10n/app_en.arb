@@ -3,136 +3,232 @@
 
   "appName": "CredyNox",
   "@appName": { "description": "Application name" },
-
   "appTagline": "Finance OS",
-  "@appTagline": { "description": "App tagline shown below logo" },
-
+  "@appTagline": {},
   "splashLoading": "Initializing...",
-  "@splashLoading": { "description": "Splash screen loading text" },
+  "@splashLoading": {},
+
+  "genericBack": "Back",
+  "@genericBack": {},
+  "genericRetry": "Retry",
+  "@genericRetry": {},
+  "statusActive": "Active",
+  "@statusActive": {},
+  "statusDisabled": "Disabled",
+  "@statusDisabled": {},
+  "statusQueued": "Queued",
+  "@statusQueued": {},
+  "statusAvailable": "Available",
+  "@statusAvailable": {},
 
   "connectBankTitle": "Connect your bank",
-  "@connectBankTitle": { "description": "Title on the connect bank screen" },
-
+  "@connectBankTitle": {},
   "connectBankSubtitle": "Securely link a financial institution and let CredyNox monitor your cash flow automatically.",
-  "@connectBankSubtitle": { "description": "Subtitle on the connect bank screen" },
-
+  "@connectBankSubtitle": {},
   "connectBankChooseLabel": "Choose a bank",
-  "@connectBankChooseLabel": { "description": "Section label above bank list" },
-
+  "@connectBankChooseLabel": {},
   "connectBankSecurityNote": "256-bit encrypted · Read-only access · No credentials stored",
-  "@connectBankSecurityNote": { "description": "Security disclaimer below bank list" },
-
+  "@connectBankSecurityNote": {},
   "bankCardStatusConnected": "Connected",
-  "@bankCardStatusConnected": { "description": "Status label when bank is already connected" },
-
+  "@bankCardStatusConnected": {},
   "bankCardStatusReady": "Ready to connect",
-  "@bankCardStatusReady": { "description": "Status label when bank is selected and ready" },
-
+  "@bankCardStatusReady": {},
   "bankCardStatusIdle": "Tap to select",
-  "@bankCardStatusIdle": { "description": "Status label for unselected bank" },
-
+  "@bankCardStatusIdle": {},
   "bankCardBtnConnected": "Connected",
-  "@bankCardBtnConnected": { "description": "Button label for already-connected bank" },
-
+  "@bankCardBtnConnected": {},
   "bankCardBtnConnect": "Connect now",
-  "@bankCardBtnConnect": { "description": "Button label to trigger connection" },
-
+  "@bankCardBtnConnect": {},
   "bankCardBtnSelect": "Select",
-  "@bankCardBtnSelect": { "description": "Button label to select a bank" },
-
+  "@bankCardBtnSelect": {},
   "bankCardBtnConnecting": "Connecting…",
-  "@bankCardBtnConnecting": { "description": "Button label during connection process" },
-
+  "@bankCardBtnConnecting": {},
   "connectBankSuccessSnackbar": "{bankName} connected successfully",
   "@connectBankSuccessSnackbar": {
-    "description": "Snackbar shown after successful bank connection",
-    "placeholders": {
-      "bankName": { "type": "String" }
-    }
+    "placeholders": { "bankName": { "type": "String" } }
   },
-
   "connectBankErrorLoad": "Could not load banks. Please try again.",
-  "@connectBankErrorLoad": { "description": "Error message when bank list fails to load" },
-
+  "@connectBankErrorLoad": {},
   "connectBankRetry": "Retry",
-  "@connectBankRetry": { "description": "Retry button label" },
+  "@connectBankRetry": {},
 
   "dashboardTitle": "Dashboard",
-  "@dashboardTitle": { "description": "Dashboard screen title" },
-
+  "@dashboardTitle": {},
   "dashboardGreetingMorning": "Good morning",
-  "@dashboardGreetingMorning": { "description": "Morning greeting" },
-
+  "@dashboardGreetingMorning": {},
   "dashboardGreetingAfternoon": "Good afternoon",
-  "@dashboardGreetingAfternoon": { "description": "Afternoon greeting" },
-
+  "@dashboardGreetingAfternoon": {},
   "dashboardGreetingEvening": "Good evening",
-  "@dashboardGreetingEvening": { "description": "Evening greeting" },
-
+  "@dashboardGreetingEvening": {},
   "balanceCardTitle": "Total Balance",
-  "@balanceCardTitle": { "description": "Title for the balance card" },
-
+  "@balanceCardTitle": {},
   "balanceCardChange": "{sign}{percent}% this month",
   "@balanceCardChange": {
-    "description": "Monthly change label",
     "placeholders": {
       "sign": { "type": "String" },
       "percent": { "type": "String" }
     }
   },
-
   "liquidityCardTitle": "Liquidity",
-  "@liquidityCardTitle": { "description": "Title for liquidity card" },
-
+  "@liquidityCardTitle": {},
   "liquidityCardAvailable": "Available",
-  "@liquidityCardAvailable": { "description": "Available label" },
-
+  "@liquidityCardAvailable": {},
   "liquidityCardReserved": "Reserved",
-  "@liquidityCardReserved": { "description": "Reserved label" },
-
+  "@liquidityCardReserved": {},
   "automationCardTitle": "Automations",
-  "@automationCardTitle": { "description": "Title for automation status card" },
-
+  "@automationCardTitle": {},
   "automationCardActive": "{count} rules active",
   "@automationCardActive": {
-    "description": "Active rules count",
-    "placeholders": {
-      "count": { "type": "int" }
-    }
+    "placeholders": { "count": { "type": "int" } }
   },
-
   "automationCardLastRun": "Last run {time}",
   "@automationCardLastRun": {
-    "description": "Last run timestamp",
-    "placeholders": {
-      "time": { "type": "String" }
-    }
+    "placeholders": { "time": { "type": "String" } }
   },
-
   "timelineCardTitle": "Recent Activity",
-  "@timelineCardTitle": { "description": "Title for the timeline card" },
+  "@timelineCardTitle": {},
 
   "navDashboard": "Dashboard",
-  "@navDashboard": { "description": "Nav item label" },
-
+  "@navDashboard": {},
   "navAccounts": "Accounts",
-  "@navAccounts": { "description": "Nav item label" },
-
+  "@navAccounts": {},
   "navAutomate": "Automate",
-  "@navAutomate": { "description": "Nav item label" },
-
+  "@navAutomate": {},
   "navProfile": "Profile",
-  "@navProfile": { "description": "Nav item label" },
-
+  "@navProfile": {},
   "navSettings": "Settings",
-  "@navSettings": { "description": "Nav sidebar item" },
-
+  "@navSettings": {},
   "navHelp": "Help",
-  "@navHelp": { "description": "Nav sidebar item" },
-
+  "@navHelp": {},
   "navTimeline": "Timeline",
-  "@navTimeline": { "description": "Nav sidebar item" },
-
+  "@navTimeline": {},
   "navAnalytics": "Analytics",
-  "@navAnalytics": { "description": "Nav sidebar item" }
+  "@navAnalytics": {},
+
+  "profileTitle": "Profile",
+  "@profileTitle": {},
+  "profileBanksTitle": "Connected institutions",
+  "@profileBanksTitle": {},
+  "profileBanksSubtitle": "Banks currently linked to the simulation engine.",
+  "@profileBanksSubtitle": {},
+  "profileStatOptimized": "Optimized money",
+  "@profileStatOptimized": {},
+  "profileStatBalance": "Balance",
+  "@profileStatBalance": {},
+  "profileStatBanks": "Connected banks",
+  "@profileStatBanks": {},
+  "profileStatAI": "AI status",
+  "@profileStatAI": {},
+  "profileLoadError": "Failed to load profile. Please try again.",
+  "@profileLoadError": {},
+
+  "activityTitle": "Activity",
+  "@activityTitle": {},
+  "activitySubtitle": "Everything the engine did, in chronological order.",
+  "@activitySubtitle": {},
+  "activityMetricToday": "Today",
+  "@activityMetricToday": {},
+  "activityEventsCount": "{count} events",
+  "@activityEventsCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "activityMetricIncome": "Income",
+  "@activityMetricIncome": {},
+  "activityMetricAutomations": "Automations",
+  "@activityMetricAutomations": {},
+  "activityMetricProtected": "Protected",
+  "@activityMetricProtected": {},
+  "activityTimelineTitle": "Timeline",
+  "@activityTimelineTitle": {},
+  "activityTimelineSubtitle": "Recent simulation and protection events.",
+  "@activityTimelineSubtitle": {},
+  "activityAmountView": "View",
+  "@activityAmountView": {},
+  "activityLoadError": "Failed to load activity. Please try again.",
+  "@activityLoadError": {},
+
+  "analyticsTitle": "Analytics",
+  "@analyticsTitle": {},
+  "analyticsSubtitle": "A compact view of growth, retention, and cash efficiency.",
+  "@analyticsSubtitle": {},
+  "analyticsMetricSavings": "Savings rate",
+  "@analyticsMetricSavings": {},
+  "analyticsMetricRunway": "Runway",
+  "@analyticsMetricRunway": {},
+  "analyticsMetricRisk": "Risk score",
+  "@analyticsMetricRisk": {},
+  "analyticsMetricROI": "Automation ROI",
+  "@analyticsMetricROI": {},
+  "analyticsChartTitle": "Cash flow trend",
+  "@analyticsChartTitle": {},
+  "analyticsChartSubtitle": "Last 30 days of inflow vs reserve movement.",
+  "@analyticsChartSubtitle": {},
+  "analyticsInsightsTitle": "Top insights",
+  "@analyticsInsightsTitle": {},
+  "analyticsInsightsSubtitle": "What the engine would recommend next.",
+  "@analyticsInsightsSubtitle": {},
+  "analyticsInsight1Title": "Increase reserve rate",
+  "@analyticsInsight1Title": {},
+  "analyticsInsight1Desc": "Current balance is {balance} · main institution: {bank}.",
+  "@analyticsInsight1Desc": {
+    "placeholders": {
+      "balance": { "type": "String" },
+      "bank": { "type": "String" }
+    }
+  },
+  "analyticsInsight2Title": "Reduce low-value subscriptions",
+  "@analyticsInsight2Title": {},
+  "analyticsInsight2Desc": "Cancel 2 recurring items to free ~$180 per month.",
+  "@analyticsInsight2Desc": {},
+  "analyticsInsight3Title": "Trigger automation earlier",
+  "@analyticsInsight3Title": {},
+  "analyticsInsight3Desc": "Set the reserve rule to fire 8 hours sooner after payroll.",
+  "@analyticsInsight3Desc": {},
+  "analyticsLoadError": "Failed to load analytics. Please try again.",
+  "@analyticsLoadError": {},
+
+  "automationsTitle": "Automations",
+  "@automationsTitle": {},
+  "automationsSubtitle": "Rules that protect cash flow and move money automatically.",
+  "@automationsSubtitle": {},
+  "automationsOverviewCount": "{count} of 4 automations enabled",
+  "@automationsOverviewCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "automationsOverviewDesc": "The engine reserves cash, pays bills, and watches thresholds in real time.",
+  "@automationsOverviewDesc": {},
+  "automationAutoReserveTitle": "Auto reserve",
+  "@automationAutoReserveTitle": {},
+  "automationAutoReserveDesc": "Move salary into protected funds automatically.",
+  "@automationAutoReserveDesc": {},
+  "automationLiquidityTitle": "Smart liquidity",
+  "@automationLiquidityTitle": {},
+  "automationLiquidityDesc": "Keep enough available cash before payouts.",
+  "@automationLiquidityDesc": {},
+  "automationBillsTitle": "Auto bills",
+  "@automationBillsTitle": {},
+  "automationBillsDesc": "Schedule utilities and subscriptions safely.",
+  "@automationBillsDesc": {},
+  "automationAITitle": "AI optimization",
+  "@automationAITitle": {},
+  "automationAIDesc": "Suggest better savings and transfer moments.",
+  "@automationAIDesc": {},
+  "automationRulesTitle": "Automation rules",
+  "@automationRulesTitle": {},
+  "automationRulesSubtitle": "Review what the engine does when signals change.",
+  "@automationRulesSubtitle": {},
+  "automationRule1Title": "Salary detection",
+  "@automationRule1Title": {},
+  "automationRule1Desc": "Detect incoming salary, reserve funds, and update balances.",
+  "@automationRule1Desc": {},
+  "automationRule2Title": "Low balance alert",
+  "@automationRule2Title": {},
+  "automationRule2Desc": "Warn if liquidity drops below the configured threshold.",
+  "@automationRule2Desc": {},
+  "automationRule3Title": "Budget exceed block",
+  "@automationRule3Title": {},
+  "automationRule3Desc": "Mark spending bursts and recommend a reserve transfer.",
+  "@automationRule3Desc": {},
+  "automationsLoadError": "Failed to load automations. Please try again.",
+  "@automationsLoadError": {}
 }

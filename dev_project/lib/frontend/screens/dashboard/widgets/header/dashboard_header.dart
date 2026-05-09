@@ -20,7 +20,7 @@ class Header extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Reactive simulation engine connected to live backend data.',
+              'Reactive simulation engine \nconnected to live backend data.',
               style: TextStyle(color: AppColors.textSecondary),
             ),
           ],
