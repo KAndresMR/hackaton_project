@@ -23,7 +23,6 @@ abstract class AppTheme {
         onError: AppColors.textPrimary,
       ),
       scaffoldBackgroundColor: AppColors.bgBase,
-      useMaterial3: true,
       textTheme: _buildTextTheme(),
       cardTheme: _buildCardTheme(),
       appBarTheme: _buildAppBarTheme(),

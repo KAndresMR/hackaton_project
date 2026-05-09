@@ -180,7 +180,7 @@ class _ToggleRow extends StatelessWidget {
               ],
             ),
           ),
-          Switch(value: value, onChanged: onChanged, activeColor: accent),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: accent),
         ],
       ),
     );

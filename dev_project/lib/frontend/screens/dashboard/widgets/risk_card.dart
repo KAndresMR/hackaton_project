@@ -16,7 +16,7 @@ class RiskCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO(controller):
+          
           // Replace mock risk metrics with realtime controller/provider data.
 
           const NxCardHeader(
