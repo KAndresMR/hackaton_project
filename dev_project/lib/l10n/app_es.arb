@@ -42,12 +42,16 @@
 
   "timelineCardTitle": "Actividad reciente",
 
-  "navDashboard": "Panel",
+  "navDashboard": "Dashboard",
   "navAccounts": "Cuentas",
   "navAutomate": "Automatizar",
   "navProfile": "Perfil",
+  
   "navSettings": "Ajustes",
   "navHelp": "Ayuda",
   "navTimeline": "Cronología",
   "navAnalytics": "Analíticas"
+
+
+  
 }

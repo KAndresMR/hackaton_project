@@ -16,7 +16,12 @@
         "titleBar.activeBackground": "#dd0531",
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#dd053199",
-        "titleBar.inactiveForeground": "#e7e7e799"
+        "titleBar.inactiveForeground": "#e7e7e799",
+        "dart.previewLsp": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "dart.completeFunctionCalls": true
     },
     "peacock.color": "#dd0531",
     "cmake.sourceDirectory": "/Users/andresmorocho/Downloads/endify/hackaton_project/dev_project/linux"

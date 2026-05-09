@@ -432,10 +432,10 @@ class _BankCard extends StatelessWidget {
           // ── Botón acción ──────────────────────────────────
           SizedBox(
             width: double.infinity,
-            height: 40,
+            height: 50,
             child: bank['connected']
                 ? OutlinedButton(
-                    onPressed: null,
+                    onPressed: (){},
                     child: Text(btnText),
                   )
                 : FilledButton(

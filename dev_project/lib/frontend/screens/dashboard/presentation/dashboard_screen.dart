@@ -1,4 +1,4 @@
-import 'package:credynox/frontend/screens/dashboard/widgets/dashboard_grid.dart';
+import 'package:credynox/frontend/screens/dashboard/widgets/layout/dashboard_grid.dart';
 import 'package:flutter/material.dart';
 
 

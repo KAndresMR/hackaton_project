@@ -110,7 +110,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get timelineCardTitle => 'Actividad reciente';
 
   @override
-  String get navDashboard => 'Panel';
+  String get navDashboard => 'Dashboard';
 
   @override
   String get navAccounts => 'Cuentas';
