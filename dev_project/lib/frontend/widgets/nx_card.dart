@@ -1,6 +1,18 @@
 import 'package:credynox/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
+// ─────────────────────────────────────────────────────────────────────────────
+// NxCard
+//
+// Uso habitual (contenido fijo, tamaño conocido):
+//   NxCard(child: Text('hello'))
+//
+// Cuando el contenido puede ser más alto que la pantalla (ej: ConnectBankScreen)
+// usa NxCard.scroll() — agrega internamente un SingleChildScrollView:
+//   NxCard.scroll(child: Column(...grande...))
+//
+// hoverable: mueve el borde y el glow al hacer hover (desktop/web).
+// ─────────────────────────────────────────────────────────────────────────────
 class NxCard extends StatefulWidget {
   const NxCard({
     super.key,
@@ -14,7 +26,37 @@ class NxCard extends StatefulWidget {
     this.height,
     this.borderRadius,
     this.hoverable = false,
-  });
+    bool scrollable = false,
+  }) : _scrollable = scrollable;
+
+  /// Constructor named para contenido que puede desbordarse verticalmente.
+  /// Ideal para pantallas móviles con mucho contenido.
+  const NxCard.scroll({
+    Key? key,
+    required Widget child,
+    EdgeInsetsGeometry? padding,
+    Gradient? gradient,
+    Color? borderColor,
+    Color? glowColor,
+    VoidCallback? onTap,
+    double? width,
+    double? height,
+    double? borderRadius,
+    bool hoverable = false,
+  }) : this(
+          key: key,
+          child: child,
+          padding: padding,
+          gradient: gradient,
+          borderColor: borderColor,
+          glowColor: glowColor,
+          onTap: onTap,
+          width: width,
+          height: height,
+          borderRadius: borderRadius,
+          hoverable: hoverable,
+          scrollable: true,
+        );
 
   final Widget child;
   final EdgeInsetsGeometry? padding;
@@ -26,6 +68,7 @@ class NxCard extends StatefulWidget {
   final double? height;
   final double? borderRadius;
   final bool hoverable;
+  final bool _scrollable;
 
   @override
   State<NxCard> createState() => _NxCardState();
@@ -38,6 +81,22 @@ class _NxCardState extends State<NxCard> {
   Widget build(BuildContext context) {
     final radius = widget.borderRadius ?? 16.0;
     final hovered = _hovered && widget.hoverable;
+
+    // ── Contenido interno ──────────────────────────────────
+    Widget content = Padding(
+      padding: widget.padding ?? const EdgeInsets.all(20),
+      child: widget.child,
+    );
+
+    // Si el card es scrollable, envolvemos en SingleChildScrollView.
+    // Esto evita el RenderFlex overflow en móvil cuando el contenido
+    // supera la altura disponible.
+    if (widget._scrollable) {
+      content = SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: content,
+      );
+    }
 
     return MouseRegion(
       onEnter: widget.hoverable ? (_) => setState(() => _hovered = true) : null,
@@ -61,7 +120,8 @@ class _NxCardState extends State<NxCard> {
             boxShadow: [
               if (widget.glowColor != null)
                 BoxShadow(
-                  color: widget.glowColor!.withValues(alpha: hovered ? 0.15 : 0.08),
+                  color: widget.glowColor!
+                      .withValues(alpha: hovered ? 0.15 : 0.08),
                   blurRadius: hovered ? 24 : 12,
                   spreadRadius: 0,
                   offset: const Offset(0, 4),
@@ -75,10 +135,7 @@ class _NxCardState extends State<NxCard> {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(radius),
-            child: Padding(
-              padding: widget.padding ?? const EdgeInsets.all(20),
-              child: widget.child,
-            ),
+            child: content,
           ),
         ),
       ),
@@ -86,7 +143,9 @@ class _NxCardState extends State<NxCard> {
   }
 }
 
-// ── NxCardHeader – standardized card top row ──────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// NxCardHeader
+// ─────────────────────────────────────────────────────────────────────────────
 class NxCardHeader extends StatelessWidget {
   const NxCardHeader({
     super.key,
@@ -110,18 +169,7 @@ class NxCardHeader extends StatelessWidget {
     return Row(
       children: [
         if (icon != null) ...[
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: (iconColor ?? AppColors.cyan).withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: (iconColor ?? AppColors.cyan).withValues(alpha: 0.2),
-              ),
-            ),
-            child: Icon(icon, size: 17, color: iconColor ?? AppColors.cyan),
-          ),
+          NxIconBox(icon: icon!, color: iconColor ?? AppColors.cyan),
           const SizedBox(width: 12),
         ],
         Expanded(
@@ -141,7 +189,7 @@ class NxCardHeader extends StatelessWidget {
                   ),
                   if (badge != null) ...[
                     const SizedBox(width: 8),
-                    _Badge(label: badge!),
+                    NxBadge(label: badge!),
                   ],
                 ],
               ),
@@ -162,25 +210,66 @@ class NxCardHeader extends StatelessWidget {
   }
 }
 
-class _Badge extends StatelessWidget {
-  const _Badge({required this.label});
+// ── Icono cuadrado con fondo semitransparente ─────────────────────────────────
+class NxIconBox extends StatelessWidget {
+  const NxIconBox({
+    super.key,
+    required this.icon,
+    required this.color,
+    this.size = 34,
+    this.iconSize = 17,
+  });
+
+  final IconData icon;
+  final Color color;
+  final double size;
+  final double iconSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(size * 0.29),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
+      ),
+      child: Icon(icon, size: iconSize, color: color),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NxBadge – reutilizable fuera de NxCardHeader
+// ─────────────────────────────────────────────────────────────────────────────
+class NxBadge extends StatelessWidget {
+  const NxBadge({
+    super.key,
+    required this.label,
+    this.color = AppColors.emerald,
+    this.bgColor = AppColors.emeraldMuted,
+  });
+
   final String label;
+  final Color color;
+  final Color bgColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: AppColors.emeraldMuted,
+        color: bgColor,
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: AppColors.emerald.withValues(alpha: 0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         label,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 9,
           fontWeight: FontWeight.w700,
-          color: AppColors.emerald,
+          color: color,
           letterSpacing: 0.5,
         ),
       ),
@@ -188,16 +277,15 @@ class _Badge extends StatelessWidget {
   }
 }
 
-// ── NxDivider ────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// NxDivider
+// ─────────────────────────────────────────────────────────────────────────────
 class NxDivider extends StatelessWidget {
   const NxDivider({super.key, this.height = 1});
   final double height;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      color: AppColors.borderSubtle,
-    );
+    return Container(height: height, color: AppColors.borderSubtle);
   }
 }

@@ -1,0 +1,138 @@
+{
+  "@@locale": "en",
+
+  "appName": "CredyNox",
+  "@appName": { "description": "Application name" },
+
+  "appTagline": "Finance OS",
+  "@appTagline": { "description": "App tagline shown below logo" },
+
+  "splashLoading": "Initializing...",
+  "@splashLoading": { "description": "Splash screen loading text" },
+
+  "connectBankTitle": "Connect your bank",
+  "@connectBankTitle": { "description": "Title on the connect bank screen" },
+
+  "connectBankSubtitle": "Securely link a financial institution and let CredyNox monitor your cash flow automatically.",
+  "@connectBankSubtitle": { "description": "Subtitle on the connect bank screen" },
+
+  "connectBankChooseLabel": "Choose a bank",
+  "@connectBankChooseLabel": { "description": "Section label above bank list" },
+
+  "connectBankSecurityNote": "256-bit encrypted · Read-only access · No credentials stored",
+  "@connectBankSecurityNote": { "description": "Security disclaimer below bank list" },
+
+  "bankCardStatusConnected": "Connected",
+  "@bankCardStatusConnected": { "description": "Status label when bank is already connected" },
+
+  "bankCardStatusReady": "Ready to connect",
+  "@bankCardStatusReady": { "description": "Status label when bank is selected and ready" },
+
+  "bankCardStatusIdle": "Tap to select",
+  "@bankCardStatusIdle": { "description": "Status label for unselected bank" },
+
+  "bankCardBtnConnected": "Connected",
+  "@bankCardBtnConnected": { "description": "Button label for already-connected bank" },
+
+  "bankCardBtnConnect": "Connect now",
+  "@bankCardBtnConnect": { "description": "Button label to trigger connection" },
+
+  "bankCardBtnSelect": "Select",
+  "@bankCardBtnSelect": { "description": "Button label to select a bank" },
+
+  "bankCardBtnConnecting": "Connecting…",
+  "@bankCardBtnConnecting": { "description": "Button label during connection process" },
+
+  "connectBankSuccessSnackbar": "{bankName} connected successfully",
+  "@connectBankSuccessSnackbar": {
+    "description": "Snackbar shown after successful bank connection",
+    "placeholders": {
+      "bankName": { "type": "String" }
+    }
+  },
+
+  "connectBankErrorLoad": "Could not load banks. Please try again.",
+  "@connectBankErrorLoad": { "description": "Error message when bank list fails to load" },
+
+  "connectBankRetry": "Retry",
+  "@connectBankRetry": { "description": "Retry button label" },
+
+  "dashboardTitle": "Dashboard",
+  "@dashboardTitle": { "description": "Dashboard screen title" },
+
+  "dashboardGreetingMorning": "Good morning",
+  "@dashboardGreetingMorning": { "description": "Morning greeting" },
+
+  "dashboardGreetingAfternoon": "Good afternoon",
+  "@dashboardGreetingAfternoon": { "description": "Afternoon greeting" },
+
+  "dashboardGreetingEvening": "Good evening",
+  "@dashboardGreetingEvening": { "description": "Evening greeting" },
+
+  "balanceCardTitle": "Total Balance",
+  "@balanceCardTitle": { "description": "Title for the balance card" },
+
+  "balanceCardChange": "{sign}{percent}% this month",
+  "@balanceCardChange": {
+    "description": "Monthly change label",
+    "placeholders": {
+      "sign": { "type": "String" },
+      "percent": { "type": "String" }
+    }
+  },
+
+  "liquidityCardTitle": "Liquidity",
+  "@liquidityCardTitle": { "description": "Title for liquidity card" },
+
+  "liquidityCardAvailable": "Available",
+  "@liquidityCardAvailable": { "description": "Available label" },
+
+  "liquidityCardReserved": "Reserved",
+  "@liquidityCardReserved": { "description": "Reserved label" },
+
+  "automationCardTitle": "Automations",
+  "@automationCardTitle": { "description": "Title for automation status card" },
+
+  "automationCardActive": "{count} rules active",
+  "@automationCardActive": {
+    "description": "Active rules count",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "automationCardLastRun": "Last run {time}",
+  "@automationCardLastRun": {
+    "description": "Last run timestamp",
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "timelineCardTitle": "Recent Activity",
+  "@timelineCardTitle": { "description": "Title for the timeline card" },
+
+  "navDashboard": "Dashboard",
+  "@navDashboard": { "description": "Nav item label" },
+
+  "navAccounts": "Accounts",
+  "@navAccounts": { "description": "Nav item label" },
+
+  "navAutomate": "Automate",
+  "@navAutomate": { "description": "Nav item label" },
+
+  "navProfile": "Profile",
+  "@navProfile": { "description": "Nav item label" },
+
+  "navSettings": "Settings",
+  "@navSettings": { "description": "Nav sidebar item" },
+
+  "navHelp": "Help",
+  "@navHelp": { "description": "Nav sidebar item" },
+
+  "navTimeline": "Timeline",
+  "@navTimeline": { "description": "Nav sidebar item" },
+
+  "navAnalytics": "Analytics",
+  "@navAnalytics": { "description": "Nav sidebar item" }
+}

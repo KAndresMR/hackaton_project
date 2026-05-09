@@ -1,0 +1,53 @@
+{
+  "@@locale": "es",
+
+  "appName": "CredyNox",
+  "appTagline": "Finance OS",
+
+  "splashLoading": "Inicializando...",
+
+  "connectBankTitle": "Conecta tu banco",
+  "connectBankSubtitle": "Vincula de forma segura una institución financiera y deja que CredyNox monitoree tu flujo de caja automáticamente.",
+  "connectBankChooseLabel": "Elige un banco",
+  "connectBankSecurityNote": "Cifrado de 256 bits · Acceso de solo lectura · Sin credenciales almacenadas",
+
+  "bankCardStatusConnected": "Conectado",
+  "bankCardStatusReady": "Listo para conectar",
+  "bankCardStatusIdle": "Toca para seleccionar",
+
+  "bankCardBtnConnected": "Conectado",
+  "bankCardBtnConnect": "Conectar ahora",
+  "bankCardBtnSelect": "Seleccionar",
+  "bankCardBtnConnecting": "Conectando…",
+
+  "connectBankSuccessSnackbar": "{bankName} conectado exitosamente",
+  "connectBankErrorLoad": "No se pudo cargar la lista de bancos. Intenta de nuevo.",
+  "connectBankRetry": "Reintentar",
+
+  "dashboardTitle": "Panel",
+  "dashboardGreetingMorning": "Buenos días",
+  "dashboardGreetingAfternoon": "Buenas tardes",
+  "dashboardGreetingEvening": "Buenas noches",
+
+  "balanceCardTitle": "Balance Total",
+  "balanceCardChange": "{sign}{percent}% este mes",
+
+  "liquidityCardTitle": "Liquidez",
+  "liquidityCardAvailable": "Disponible",
+  "liquidityCardReserved": "Reservado",
+
+  "automationCardTitle": "Automatizaciones",
+  "automationCardActive": "{count} reglas activas",
+  "automationCardLastRun": "Última ejecución {time}",
+
+  "timelineCardTitle": "Actividad reciente",
+
+  "navDashboard": "Panel",
+  "navAccounts": "Cuentas",
+  "navAutomate": "Automatizar",
+  "navProfile": "Perfil",
+  "navSettings": "Ajustes",
+  "navHelp": "Ayuda",
+  "navTimeline": "Cronología",
+  "navAnalytics": "Analíticas"
+}
