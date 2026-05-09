@@ -9,3 +9,6 @@ class Transaction(BaseModel):
     type: str
     amount: float
     date: datetime
+    description: str | None = None
+    merchant: str | None = None
+    reasoning: str | None = None

@@ -129,12 +129,29 @@ class SimulationEngine:
         self._state.last_timestamp = self._state.last_timestamp + timedelta(seconds=seconds)
         return self._state.last_timestamp
 
-    def _create_transaction(self, tx_type: str, amount: float, timestamp: datetime) -> Transaction:
+    _REASONING: dict[str, str] = {
+        "income": "Incoming funds detected from a known source. Salary rule evaluated balance thresholds and triggered reserve allocation if balance exceeded $1,000.",
+        "reserve": "Engine moved funds to the protected reserve bucket after a balance threshold was crossed. This safeguards fixed-cost obligations like rent and utilities.",
+        "expense": "Discretionary outflow detected. Liquidity guard recalculated available buffer. Risk score was updated to reflect the new balance position.",
+    }
+
+    def _create_transaction(
+        self,
+        tx_type: str,
+        amount: float,
+        timestamp: datetime,
+        description: str | None = None,
+        merchant: str | None = None,
+        reasoning: str | None = None,
+    ) -> Transaction:
         transaction = Transaction(
             id=self._state.next_transaction_id,
             type=tx_type,
             amount=round(amount, 2),
             date=timestamp,
+            description=description,
+            merchant=merchant,
+            reasoning=reasoning or self._REASONING.get(tx_type),
         )
         self._state.next_transaction_id += 1
         self._state.transactions.append(transaction)
@@ -330,7 +347,12 @@ class SimulationEngine:
             salary_amount = abs(amount)
 
             self._state.user.balance += salary_amount
-            created_transactions.append(self._create_transaction("income", salary_amount, timestamp))
+            created_transactions.append(self._create_transaction(
+                "income", salary_amount, timestamp,
+                description="Monthly payroll deposit",
+                merchant="Employer",
+                reasoning=f"Salary of ${salary_amount:,.0f} detected. Balance updated to ${self._state.user.balance:,.0f}. Reserve rule evaluated.",
+            ))
             created_events.append(self._create_event(source, "completed", timestamp))
             rules_executed.append("salary_detected")
 
@@ -341,7 +363,12 @@ class SimulationEngine:
                     self._state.user.balance -= reserve
                     self._state.protected_funds += reserve
                     self._recalculate_liquidity()
-                    created_transactions.append(self._create_transaction("reserve", -reserve, reserve_timestamp))
+                    created_transactions.append(self._create_transaction(
+                        "reserve", -reserve, reserve_timestamp,
+                        description="Automated reserve transfer",
+                        merchant="Protected Funds",
+                        reasoning=f"Balance exceeded $1,000 post-salary. Engine reserved ${reserve:,.0f} to cover fixed monthly obligations.",
+                    ))
                     created_events.append(self._create_event("Funds reserved for rent", "completed", reserve_timestamp))
                     rules_executed.append("reserve_for_rent")
                     self._create_activity(
@@ -385,7 +412,11 @@ class SimulationEngine:
             expense_amount = abs(amount)
 
             self._state.user.balance = max(0.0, self._state.user.balance - expense_amount)
-            created_transactions.append(self._create_transaction(category, -expense_amount, timestamp))
+            created_transactions.append(self._create_transaction(
+                category, -expense_amount, timestamp,
+                description=f"{category.title()} purchase detected",
+                reasoning=f"${expense_amount:,.0f} outflow detected. Liquidity guard recalculated buffer. Risk score updated to reflect new balance of ${self._state.user.balance:,.0f}.",
+            ))
             created_events.append(self._create_event(description, "completed", timestamp))
             rules_executed.append("expense_detected")
             self._create_activity(
@@ -443,7 +474,12 @@ class SimulationEngine:
                     self._state.user.balance -= reserve
                     self._state.protected_funds += reserve
                     self._recalculate_liquidity()
-                    created_transactions.append(self._create_transaction("reserve", -reserve, reserve_timestamp))
+                    created_transactions.append(self._create_transaction(
+                        "reserve", -reserve, reserve_timestamp,
+                        description="Automation reserve rule executed",
+                        merchant="Protected Funds",
+                        reasoning=f"Automation run: balance ${self._state.user.balance + reserve:,.0f} exceeded $1,000. Engine reserved ${reserve:,.0f} automatically.",
+                    ))
                     created_events.append(self._create_event("Funds reserved for rent", "completed", reserve_timestamp))
                     rules_executed.append("balance_over_1000_reserve_400")
                     self._create_activity(
@@ -461,7 +497,12 @@ class SimulationEngine:
                     self._state.user.balance -= move_amount
                     self._state.protected_funds += move_amount
                     self._recalculate_liquidity()
-                    created_transactions.append(self._create_transaction("reserve", -move_amount, liquidity_timestamp))
+                    created_transactions.append(self._create_transaction(
+                        "reserve", -move_amount, liquidity_timestamp,
+                        description="Liquidity protection transfer",
+                        merchant="Protected Funds",
+                        reasoning=f"Liquidity ${self._state.available_liquidity + move_amount:,.0f} exceeded $300 threshold. Engine shifted ${move_amount:,.0f} to reserve to prevent over-exposure.",
+                    ))
                     created_events.append(self._create_event("Liquidity moved to reserve fund", "completed", liquidity_timestamp))
                     rules_executed.append("liquidity_over_300_move_120")
                     self._create_activity(

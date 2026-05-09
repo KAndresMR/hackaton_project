@@ -20,18 +20,27 @@ MOCK_TRANSACTIONS = [
         type="income",
         amount=1500.0,
         date=datetime(2026, 5, 1, 9, 15, tzinfo=UTC),
+        description="Monthly payroll deposit",
+        merchant="CredyNox Corp",
+        reasoning="Recurring income detected from known employer. Amount matches historical salary pattern ($1,500). Auto-reserve rule activated — 27% of incoming funds moved to protected bucket to cover rent and fixed costs.",
     ),
     Transaction(
         id=2,
         type="reserve",
         amount=-400.0,
         date=datetime(2026, 5, 2, 10, 30, tzinfo=UTC),
+        description="Automated reserve transfer",
+        merchant="Protected Funds",
+        reasoning="Balance exceeded $1,000 post-salary. Engine applied reserve rule: moved $400 into the protected fund bucket. This covers estimated monthly fixed costs (rent + utilities). Liquidity recalculated to $300.",
     ),
     Transaction(
         id=3,
         type="expense",
         amount=-300.0,
         date=datetime(2026, 5, 4, 14, 0, tzinfo=UTC),
+        description="Retail purchase detected",
+        merchant="Supermaxi",
+        reasoning="Discretionary spend flagged — $300 is 25% above average weekly grocery baseline. Liquidity guard checked: remaining buffer ($0) is below the $300 safety threshold. Risk score adjusted upward. No reserve violation detected; balance is non-zero.",
     ),
 ]
 
